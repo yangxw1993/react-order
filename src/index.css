@@ -1,6 +1,5 @@
 
 html, body, :global(#root) {
-  background: #ccc;
   height: 100%;
 }
 
