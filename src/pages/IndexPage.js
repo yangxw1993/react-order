@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'dva';
 import styles from './IndexPage.scss';
 import  Navbar from './Navbar'
+import Home from './Home'
 import { Layout } from 'antd'
 const {Header, Content} = Layout
 
@@ -11,7 +12,9 @@ function IndexPage() {
       <Header className={styles.header}>
         <Navbar />
       </Header>
-      <Content className={styles.content}>Content</Content>
+      <Content className={styles.content}>
+        <Home />
+      </Content>
     </Layout>
   );
 }

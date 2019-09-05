@@ -5,7 +5,7 @@ import styles from './index.scss'
 export default function index() {
   return (
     <nav className={styles.nav}>
-      <a href="./" className={styles.logo}></a>
+      <span className={styles.logo}></span>
       <Menu className={styles['menu-left']} mode="horizontal" defaultSelectedKeys={['home']}>
         <Menu.Item key={'home'}>主页</Menu.Item>
         <Menu.Item key={'menus'}>菜单</Menu.Item>

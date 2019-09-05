@@ -1,0 +1,15 @@
+.content{
+  height: 85vh;
+  background: url(../../assets/images/basil-blur-cheese-1279330.jpg) no-repeat;
+  background-size: cover;
+  .center{
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 75vw;
+    background: rgba(255,255,255,0.5);
+    text-align: center;
+    h1,h2{
+      padding: 10px 0;
+    }
+  }
+}
