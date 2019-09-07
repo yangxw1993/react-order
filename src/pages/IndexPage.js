@@ -14,11 +14,11 @@ import Regist from "./user/regist";
 import { Layout } from 'antd'
 const {Header, Content} = Layout
 
-function IndexPage() {
+function IndexPage(props) {
   return (
     <Layout className={styles.layout}>
       <Header className={styles.header}>
-        <Navbar />
+        <Navbar {...props} />
       </Header>
       <Content className={styles.content}>
         {/* 一极路由 */}
