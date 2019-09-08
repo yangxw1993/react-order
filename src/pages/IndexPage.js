@@ -1,20 +1,16 @@
 import React from 'react';
 import { connect } from 'dva';
 // 引入路由需要组件
-import { Switch, Route, Redirect } from "dva/router";
+import { Switch} from "dva/router";
 
 import styles from './IndexPage.scss';
 import  Navbar from './Navbar'
-import Home from './Home';
-import Admin from "./Admin";
-import About from "./About";
-import Menus from "./Menus";
-import Login from "./user/login";
-import Regist from "./user/regist";
 import { Layout } from 'antd'
+import SubRoutes, {RedirectRoute ,NoMatchRoute } from '../utils/SubRoutes';
 const {Header, Content} = Layout
 
 function IndexPage(props) {
+  const {routes} = props;
   return (
     <Layout className={styles.layout}>
       <Header className={styles.header}>
@@ -23,14 +19,19 @@ function IndexPage(props) {
       <Content className={styles.content}>
         {/* 一极路由 */}
         <Switch>
-          <Route path="/home" component= {Home} />
+          {/* <Route path="/home" component= {Home} />
           <Route path="/menus" component= {Menus} />
           <Route path="/about" component= {About} />
           <Route path="/admin" component= {Admin} />
           <Route path="/login" component= {Login} />
-          <Route path="/regist" component= {Regist} />
-
-          <Redirect to='/home' />
+          <Route path="/regist" component= {Regist} /> */}
+         
+          {routes.map((route, i) => (
+            <SubRoutes key={i} {...route} />
+          ))}
+          {/* <Redirect to='/home' /> */}
+          <RedirectRoute exact={true} from={'/'} routes={routes} />
+          <NoMatchRoute />
         </Switch>
       </Content>
     </Layout>
