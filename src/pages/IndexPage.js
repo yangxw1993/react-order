@@ -10,7 +10,7 @@ import SubRoutes, {RedirectRoute ,NoMatchRoute } from '../utils/SubRoutes';
 const {Header, Content} = Layout
 
 function IndexPage(props) {
-  const {routes} = props;
+  const {routes, app} = props;
   return (
     <Layout className={styles.layout}>
       <Header className={styles.header}>
@@ -27,7 +27,7 @@ function IndexPage(props) {
           <Route path="/regist" component= {Regist} /> */}
          
           {routes.map((route, i) => (
-            <SubRoutes key={i} {...route} />
+            <SubRoutes key={i} {...route} app={app} />
           ))}
           {/* <Redirect to='/home' /> */}
           <RedirectRoute exact={true} from={'/'} routes={routes} />
