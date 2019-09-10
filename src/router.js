@@ -21,7 +21,7 @@ const RouteConfig = [
         path: '/home',
         component: () => import('./pages/Home'), 
         // component: Home, 
-        model: [],
+        model: [import('./models/home')],
         redirect: true
       },
       {
