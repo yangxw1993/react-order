@@ -47,7 +47,47 @@ const RouteConfig = [
         component: () => import('./pages/About'),
         // component: About,
         model: [],
-        isLogin
+        isLogin,
+        routes: [
+          {
+            name: '历史订餐',
+            path: '/about/order',
+            model: [],
+            component: () => import('./pages/About/Order')
+          },
+          {
+            name: '联系我们',
+            path: '/about/contact',
+            model: [],
+            component: () => import('./pages/About/Contact/'),
+            routes: [
+              {
+                name: '联系电话',
+                path: '/about/contact/phone',
+                model: [],
+                component: () => import('./pages/About/Contact/Phone'),
+              },
+              {
+                name: '详情地址',
+                path: '/about/contact/address',
+                model: [],
+                component: () => import('./pages/About/Contact/Address'),
+              }
+            ]
+          },
+          {
+            name: '订餐文档',
+            path: '/about/document',
+            model: [],
+            component: () => import('./pages/About/Document')
+          },
+          {
+            name: '快递信息',
+            path: '/about/delivery',
+            model: [],
+            component: () => import('./pages/About/Delivery')
+          },
+        ]
       },
       {
         name: '登录',
