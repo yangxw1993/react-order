@@ -9,14 +9,12 @@ const { TabPane } = Tabs
 export default class index extends Component{
   // 切换tab
   changeTab = key => {
-    console.log(key,'key***',this.props);
     if(this.props.location.pathname !== key){
       this.props.history.push(key);
     }
   }
   render(){
     const {routes, app} = this.props;
-    console.log(routes,'routes**')
     return (
       <div className={styles.about}>
         <Tabs className={styles.tabs} tabPosition="left" activeKey={this.props.location.pathname} onChange={this.changeTab}>
