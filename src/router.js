@@ -8,7 +8,7 @@ import SubRoutes from './utils/SubRoutes'
 // import Menus from "./pages/Menus";
 // import Login from "./pages/user/login";
 // import Regist from "./pages/user/regist";
-
+const isLogin = true;
 const RouteConfig = [
   {
     path: '/',
@@ -22,7 +22,8 @@ const RouteConfig = [
         component: () => import('./pages/Home'), 
         // component: Home, 
         model: [import('./models/home')],
-        redirect: true
+        redirect: true,
+        isLogin
       },
       {
         name: '菜单',
@@ -30,6 +31,7 @@ const RouteConfig = [
         component: () => import('./pages/Menus'),
         // component: Menus,
         model: [],
+        isLogin
       },
       {
         name: '管理',
@@ -37,6 +39,7 @@ const RouteConfig = [
         component: () => import('./pages/Admin'),
         // component: Admin,
         model: [],
+        isLogin
       },
       {
         name: '关于我们',
@@ -44,6 +47,7 @@ const RouteConfig = [
         component: () => import('./pages/About'),
         // component: About,
         model: [],
+        isLogin
       },
       {
         name: '登录',
