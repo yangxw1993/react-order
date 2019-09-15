@@ -1,0 +1,12 @@
+.account{
+  margin: 20px auto;
+  width: 90%;
+  &-form{
+    &-item{
+      display: inline-block;
+      .btn{
+        width: 100%;
+      }
+    }
+  }
+}

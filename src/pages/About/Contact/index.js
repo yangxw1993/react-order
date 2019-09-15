@@ -3,7 +3,7 @@ import { Tabs } from 'antd'
 import styles from './index.scss'
 import SubRoutes from '../../../utils/SubRoutes'
 const { TabPane } = Tabs
-export default class index extends Component{
+export default class login extends Component{
  render(){
   const {routes, app} = this.props;
   return (
