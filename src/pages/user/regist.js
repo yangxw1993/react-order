@@ -72,8 +72,8 @@ class regist extends Component {
                   validator: this.validatorForm,
                   message: '请输入正确的手机号'
                 }
-              ]
-              // initialValue: this.state.email
+              ],
+              initialValue: this.state.phone
             })(<Input prefix={<Icon type="user"/>} placeholder="请输入用户名" />)}
 
           </Form.Item>
