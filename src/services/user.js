@@ -1,12 +1,15 @@
 import httpRequest from '../utils/httpRequest'
+import { API_URL } from '../const'
 
-const register = () => {
+const register = (data) => {
   return new Promise((resolve, reject) => {
     httpRequest({
-      url:'/test'
+      url: API_URL.REGISTER,
+      method: 'post',
+      data,
     }).then(res => {
-      resolve(res);
-    })
+      res.code === API_URL.SUCCESS_CODE ? resolve(res) : reject(new Error(res.msg));
+    }).catch(err => reject(new Error(err.message)))
   })
 }
 export  {

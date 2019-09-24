@@ -3,6 +3,7 @@ import { Form, Icon, Input, Button } from 'antd';
 import styles from './index.scss'
 import { phone_reg } from '../../utils/Regexp.js';
 import {register} from '../../services/user'
+import axios from 'axios'
 
 
 class regist extends Component {
@@ -12,8 +13,21 @@ class regist extends Component {
   handleSubmit = e => {
     this.props.form.validateFields((err, values) => {
       if(!err){
-        console.log(values,'values**')
-        register().then(res => console.log(res))
+        console.log(values,'values**');
+        const param = {
+          username: values.phone,
+          password: values.pwd,
+        }
+        // register(param).then(res => console.log(res))
+        // Send a POST request
+        axios({
+          method: 'post',
+          url: 'http://localhost:3001/user/register',
+          data: param,
+          headers: {
+            'content-type': 'application/json'
+          }
+        }).then(res => console.log(res,'*******'))
       }
     })
   }
