@@ -1,14 +1,13 @@
 import React, {Component} from 'react'
-import { Form, Icon, Input, Button } from 'antd';
+import { Form, Icon, Input, Button, message } from 'antd';
 import styles from './index.scss'
 import { phone_reg } from '../../utils/Regexp.js';
 import {register} from '../../services/user'
-import axios from 'axios'
 
 
 class regist extends Component {
   state = {
-    phone: '18812345678'
+    phone: '18712345679'
   };
   handleSubmit = e => {
     this.props.form.validateFields((err, values) => {
@@ -17,17 +16,13 @@ class regist extends Component {
         const param = {
           username: values.phone,
           password: values.pwd,
-        }
-        // register(param).then(res => console.log(res))
-        // Send a POST request
-        axios({
-          method: 'post',
-          url: 'http://localhost:3001/user/register',
-          data: param,
-          headers: {
-            'content-type': 'application/json'
-          }
-        }).then(res => console.log(res,'*******'))
+        };
+        register(param).then(res => {
+          // console.log(param,'**param')
+          this.props.history.push('/login')
+        }).catch(err => {
+          message.error(err.message);
+        })
       }
     })
   }
@@ -87,7 +82,7 @@ class regist extends Component {
                   message: '请输入正确的手机号'
                 }
               ],
-              initialValue: this.state.phone
+              // initialValue: this.state.phone
             })(<Input prefix={<Icon type="user"/>} placeholder="请输入用户名" />)}
 
           </Form.Item>
