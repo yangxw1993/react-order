@@ -1,19 +1,31 @@
 import React, { Component } from 'react'
 import {Form, Icon, Input, Button, message} from 'antd';
+import { connect } from 'dva'
 import styles from './index.scss'
 import {login} from "../../services/user";
 import {phone_reg} from "../../utils/Regexp";
 
-class loginCom extends Component {
-  handleSubmit = () => {
+@connect()
+class index extends Component {
+  handleSubmit = e => {
+    e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if(!err){
         const param = {
           username: values.phone,
           password: values.pwd,
         };
-        login(param).then(() => {
-          this.props.history.push('/home')
+        login(param).then(userRes => {
+          // 登录成功存储models
+          this.props.dispatch({
+            type: 'global/setUserInfo',
+            payload: userRes
+          }).then( () => {            
+            // 跳转
+            this.props.history.push('/'); 
+          })        
+          console.log(userRes)
+
         }).catch(err => message.error(err.message))
       }
     })
@@ -88,4 +100,4 @@ class loginCom extends Component {
   }
 }
 
-export default Form.create()(loginCom);
+export default Form.create()(index);

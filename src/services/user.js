@@ -24,7 +24,7 @@ const login = (data) => {
       method: 'post',
       data:data,
     }).then(res => {
-      res.code === SUCCESS_CODE ? resolve(res) : reject(new Error(res.msg));
+      res.code === SUCCESS_CODE ? resolve(res.data) : reject(new Error(res.msg));
     }).catch(err => reject(new Error(err.message)))
   })
 };
