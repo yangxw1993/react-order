@@ -8,10 +8,9 @@ export default function httpRequest (options){
     },
   };
   options.method = options.method ? options.method.toLocaleLowerCase() : 'get';
-  Object.assign(defaultConfig, options)
+  Object.assign(defaultConfig, options);
   return new Promise((resolve, reject) => {
     axios(defaultConfig).then(res => {
-      console.log(res,'*****')
       res.status === 200 ? resolve(res.data) : reject(new Error(res.data.msg))
     }).catch(err => {
       reject(new Error(err.message))
