@@ -5,7 +5,7 @@ export default {
 
   state: {
     userInfo: {
-      id: '123',
+      id: '',
       username: '',
       password: ''
     }

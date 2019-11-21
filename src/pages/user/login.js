@@ -17,13 +17,14 @@ class index extends Component {
         };
         login(param).then(userRes => {
           // 登录成功存储models
+          localStorage.setItem('username', param.username);
           this.props.dispatch({
             type: 'global/setUserInfo',
             payload: userRes
-          }).then( () => {            
+          }).then( () => {
             // 跳转
-            this.props.history.push('/'); 
-          })        
+            this.props.history.push('/');
+          })
           console.log(userRes)
 
         }).catch(err => message.error(err.message))

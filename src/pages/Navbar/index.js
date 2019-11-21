@@ -29,13 +29,13 @@ export default class index extends Component {
       selectedKeys: [key]
     })
   }
-  render(){  
+  render(){
     const {routes} = this.props;
     return (
       <nav className={styles.nav}>
         <span className={styles.logo}></span>
         <Menu className={styles['menu-left']} mode="horizontal" selectedKeys={this.state.selectedKeys} defaultSelectedKeys={['home']}>
-          {routes.map((route, i) => (
+          {routes.filter( item => item.isLogin || !localStorage.username).map((route, i) => (
             <Menu.Item key={route.path.substr(1)}>
               <Link to={route.path}>{route.name}</Link>
             </Menu.Item>

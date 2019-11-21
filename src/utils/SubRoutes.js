@@ -5,7 +5,7 @@ import { connect }from 'dva'
 import NoMatch from '../components/NoMatch'
 
 // 动态加载路由组件
-const dynamicCom = (app,models, component, routes, isLogin, userInfo) => 
+const dynamicCom = (app,models, component, routes, isLogin, userInfo) =>
   dynamic({
   app,
   models: () => models,
@@ -13,7 +13,7 @@ const dynamicCom = (app,models, component, routes, isLogin, userInfo) =>
     // 判断是否需要登录
     if(isLogin){
       // 判断是否登录
-      if(!userInfo.id){
+      if(!localStorage.username){
         return () => <Redirect to="/login" />
       }
     }
@@ -42,7 +42,7 @@ export function RedirectRoute({routes, from, exact}){
 }
 
 // 404组件封装
-export function NoMatchRoute({status = 404}){  
+export function NoMatchRoute({status = 404}){
   return <Route render={props => <NoMatch {...props} status={status} />} />
 }
 
