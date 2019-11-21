@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Menu } from 'antd'
+import { Menu, Dropdown, Icon } from 'antd'
 import { Link } from 'dva/router'
 import styles from './index.scss'
 
@@ -10,6 +10,19 @@ export default class index extends Component {
       selectedKeys: []
     }
   }
+  handleClickMenu = ({key}) => {
+    if(key === 'logout'){
+      localStorage.clear();
+      this.props.history.push('/')
+    }
+  };
+  menu = (
+    <Menu onClick={this.handleClickMenu}>
+      <Menu.Item key="logout">
+        <span>退出</span>
+      </Menu.Item>
+    </Menu>
+  );
   // 页面刷新
   componentDidMount(){
     this.handleSelectedKey(this.props.location.pathname);
@@ -41,6 +54,14 @@ export default class index extends Component {
             </Menu.Item>
           ))}
         </Menu>
+        {localStorage.username && (
+          <Dropdown overlay={ this.menu} className={styles['dropdown-menu']}>
+            <a className="antd-dropdown-link" href="#">
+              <span className={styles.username}>{localStorage.username}</span>
+              <Icon type="down" className={styles.icon} />
+            </a>
+          </Dropdown>
+        )}
       </nav>
     )
   }
