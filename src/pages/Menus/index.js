@@ -6,7 +6,6 @@ export default function index() {
       title: '商品',
       dataIndex: 'name',
       key: 'name',
-      // render: text => <a>{text}</a>,
     },
     {
       title: '描述',
@@ -17,20 +16,25 @@ export default function index() {
       title: '内存',
       dataIndex: 'size',
       key: 'size',
-      render: text => <span>{text}</span>
+      render: text => <span>{text}G</span>
+    },
+    {
+      title: '价格',
+      dataIndex: 'price',
+      key: 'price',
+      render: text => <span>¥{text}</span>
     },
     {
       title: '加入',
       key: 'action',
       render: text => {
-        const obj = {
+        return  {
           children: (
             <Button>
               <Icon type='plus' />
             </Button>
           )
-        };
-        return obj
+        }
       }
     }
     /*{
@@ -53,11 +57,11 @@ export default function index() {
       description: '好用的Mac',
       options:[
         {
-          size: 13,
+          size: 256,
           price: 13000
         },
         {
-          size: 15,
+          size: 512,
           price: 18000
         }
       ]
@@ -93,11 +97,19 @@ export default function index() {
       ]
     }
   ];
+  let dataSource = [];
+  data.forEach((item, index) => {
+    item.options.forEach((optionItem, optionsIndex) => {
+      const key = `${item.key}_${optionsIndex}`;
+      Object.assign(item, optionItem, {key});
+      dataSource.push({...item});
+    });
+  });
   return (
     <Table
       pagination={false}
       columns={columns}
-      dataSource={data} />
+      dataSource={dataSource} />
   )
 }
 
