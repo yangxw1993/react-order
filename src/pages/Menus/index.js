@@ -6,11 +6,27 @@ export default function index() {
       title: '商品',
       dataIndex: 'name',
       key: 'name',
+      render(text, value, index){
+        const obj = {
+          children: (<b>{text}</b>),
+          props: {},
+        };
+        obj.props.rowSpan = index % 2 ? 0 : 2;
+        return obj
+      }
     },
     {
       title: '描述',
       dataIndex: 'description',
       key: 'description',
+      render(text, value, index){
+        const obj = {
+          children: text,
+          props: {},
+        };
+        obj.props.rowSpan = index % 2 ? 0 : 2;
+        return obj
+      }
     },
     {
       title: '内存',
@@ -30,7 +46,7 @@ export default function index() {
       render: text => {
         return  {
           children: (
-            <Button>
+            <Button type="primary">
               <Icon type='plus' />
             </Button>
           )
