@@ -145,13 +145,9 @@ class Index extends Component {
           return {
             children: (
               <div>
-                <Button type="primary">
-                  <Icon type='plus' />
-                </Button>
+                <Button type="primary" size="small" icon="minus" shape="circle" />
                 <span> 1 </span>
-                <Button type="primary">
-                  <Icon type='plus' />
-                </Button>
+                <Button type="primary" size="small" icon="plus" shape="circle" />
               </div>
             )
           }
@@ -184,7 +180,7 @@ class Index extends Component {
         <Col sm={24} md={8}>
           {this.renderCartTable()}
           <p className={style['total-price']}>总价：</p>
-          <Button type="primary" >提交</Button>
+          <Button type="primary" className={style['submit']}>提交</Button>
         </Col>
       </Row>
     );
