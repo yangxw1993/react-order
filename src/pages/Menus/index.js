@@ -121,17 +121,27 @@ class Index extends Component {
       });
     });
     const addCart = (item)=> {
-      const {name, size, price} = item;
+      let { cart } = this.state;
+      const index =  cart.findIndex(cartItem => cartItem.key === item.key);
+      if(index > -1){
+        cart.splice(index, 1, {
+          ...cart[index],
+          count: cart[index].count + 1
+        })
+      }else{
+        cart = [...cart, {...item, count: 1}]
+      }
       this.setState({
-        cart: [...this.state.cart, {name, price, size}]
-      })
-      console.log(this.state.cart,'**')
+        cart
+      });
     };
     return (
       <Table
         pagination={false}
         columns={columns}
-        dataSource={dataSource} />
+        dataSource={dataSource}
+        rowKey='key'
+      />
     )
   }
 
@@ -141,13 +151,13 @@ class Index extends Component {
         title: '数量',
         dataIndex: 'count',
         key: 'count',
-        render(text, value, index){
+        render(text, record, index){
           return {
             children: (
               <div>
-                <Button type="primary" size="small" icon="minus" shape="circle" />
-                <span> 1 </span>
-                <Button type="primary" size="small" icon="plus" shape="circle" />
+                <Button type="primary" onClick={() => reduceCartNum(index)} size="small" icon="minus" shape="circle" />
+                <span> {record.count} </span>
+                <Button type="primary" onClick={() => addCartNum(index)} size="small" icon="plus" shape="circle" />
               </div>
             )
           }
@@ -165,21 +175,52 @@ class Index extends Component {
       }
     ];
     const data = this.state.cart;
+    // 减少购物车
+    const reduceCartNum = index => {
+      let {cart} = this.state;
+      const curCart = cart[index];
+      if(curCart.count <= 1){
+        cart.splice(index, 1);
+      }else{
+        cart.splice(index, 1, {
+          ...curCart,
+          count: curCart.count - 1
+        })
+      }
+      this.setState({
+        cart
+      })
+    };
+    const addCartNum = index => {
+      let {cart} = this.state;
+      const curCart = cart[index];
+      cart.splice(index, 1, {
+        ...curCart,
+        count: curCart.count + 1
+      });
+      this.setState({
+        cart
+      })
+    };
     return (
       <Table
         pagination={false}
         columns={columns}
-        dataSource={data} />
+        dataSource={data}
+        rowKey='key'
+      />
     )
   }
 
   render() {
+    // 粗略计算，
+    const totalPrice = this.state.cart.reduce((total, item) => (total += item.price * item.count ), 0);
     return (
       <Row>
         <Col sm={24} md={16}>{this.renderMenuTable()}</Col>
         <Col sm={24} md={8}>
           {this.renderCartTable()}
-          <p className={style['total-price']}>总价：</p>
+          <p className={style['total-price']}>总价：{totalPrice}</p>
           <Button type="primary" className={style['submit']}>提交</Button>
         </Col>
       </Row>
