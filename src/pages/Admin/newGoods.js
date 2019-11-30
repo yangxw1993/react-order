@@ -1,9 +1,34 @@
 import React, {Component} from 'react';
 import {Button, Form, Input} from 'antd'
 import styles from '../IndexPage.scss'
+import { addGoods } from "../../services/goods";
 const {TextArea} = Input;
 
 class NewGoods extends Component {
+  handleSubmit = () => {
+    this.props.form.validateFields((err, value) => {
+      if(!err){
+        const {goodsName, goodsDesc, size1, price1, size2, price2} = value;
+        const data = {
+          goodsName,
+          goodsDesc,
+          options: [
+            {
+              size: size1,
+              price: price1
+            },
+            {
+              size: size2,
+              price: price2
+            }
+          ]
+        };
+        addGoods(data).then(res => {
+          console.log(res,'**')
+        }).catch(error => console.error(err))
+      }
+    })
+  }
   render() {
     const formItemLayout = {
       labelCol: {
@@ -34,13 +59,11 @@ class NewGoods extends Component {
         <h3>添加新的商品 </h3>
         <Form>
           <Form.Item {...formItemLayout} label='商品'>
-            {getFieldDecorator('goods-name', goodsNameConfig)(<Input />)}
+            {getFieldDecorator('goodsName', goodsNameConfig)(<Input />)}
           </Form.Item>
           <Form.Item {...formItemLayout} label='描述'>
-            {getFieldDecorator('goods-desc', goodsDescConfig)(<TextArea />)}
-
+            {getFieldDecorator('goodsDesc', goodsDescConfig)(<TextArea />)}
           </Form.Item>
-
           <p>
             <strong>选项1：</strong>
           </p>
@@ -57,15 +80,14 @@ class NewGoods extends Component {
             {getFieldDecorator('size2', goodsSizeConfig)(<Input />)}
           </Form.Item>
           <Form.Item {...formItemLayout} label='价格2'>
-            {getFieldDecorator('price1', goodsPriceConfig)(<Input />)}
+            {getFieldDecorator('price2', goodsPriceConfig)(<Input />)}
           </Form.Item>
           <Form.Item>
-            <Button className={styles['btn-100']} onClick={this.submit()} type={"primary"}>提交</Button>
+            <Button className={styles['btn-100']} onClick={this.handleSubmit} type={"primary"}>提交</Button>
           </Form.Item>
         </Form>
       </div>
     );
   }
 }
-
 export default Form.create()(NewGoods);
