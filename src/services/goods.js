@@ -17,7 +17,17 @@ const addGoods = (data) => {
     }).catch(err => reject(new Error(err.message)))
   })
 };
+const getGoodsList = () => {
+  return new Promise((resolve, reject) => {
+    httpRequest({
+      url: API_URL.GET_GOODS_LIST,
+    }).then(res => {
+      res.code === SUCCESS_CODE ? resolve(res.data) : reject(new Error(res.msg));
+    }).catch(err => reject(new Error(err.message)))
+  })
+};
 
 export  {
-  addGoods
+  addGoods,
+  getGoodsList
 }

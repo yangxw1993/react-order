@@ -1,21 +1,37 @@
 import React, {Component} from 'react';
-import {Button, Icon, Table, Row, Col} from 'antd';
+import {Button, Icon, Table, Row, Col, message} from 'antd';
 import style from "./index.scss";
+import {getGoodsList} from '../../services/goods'
 
 class Index extends Component {
   constructor(props) {
     super(props);
 
   }
+  // 钩子函数
+  componentDidMount() {
+    this.getList();
+  }
+  // 获取列表
+  getList = () => {
+    getGoodsList().then(res => {
+      if(res && res.length){
+        this.setState({
+          dataSource: res
+        })
+      }
+    }).catch(err => message.error(err.message))
+  };
   state = {
     cart: [],
+    dataSource: []
   };
   renderMenuTable(){
     const columns = [
       {
         title: '商品',
-        dataIndex: 'name',
-        key: 'name',
+        dataIndex: 'goodsName',
+        key: 'goodsName',
         render(text, value, index){
           const obj = {
             children: (<b>{text}</b>),
@@ -113,9 +129,9 @@ class Index extends Component {
       }
     ];
     let dataSource = [];
-    data.forEach((item, index) => {
+    this.state.dataSource.forEach((item, index) => {
       item.options.forEach((optionItem, optionsIndex) => {
-        const key = `${item.key}_${optionsIndex}`;
+        const key = `${item.id}_${optionsIndex}`;
         Object.assign(item, optionItem, {key});
         dataSource.push({...item});
       });

@@ -10,7 +10,8 @@ const API_URL = {
   /**
    * 商品
    */
-  ADD_GOODS:`${BASE_URL}/goods/addGoods`
+  ADD_GOODS:`${BASE_URL}/goods/addGoods`,
+  GET_GOODS_LIST:`${BASE_URL}/goods/getGoods`
 };
 
 export  {

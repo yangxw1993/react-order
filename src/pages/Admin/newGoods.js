@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Form, Input} from 'antd'
+import {Button, Form, Input, message} from 'antd'
 import styles from '../IndexPage.scss'
 import { addGoods } from "../../services/goods";
 const {TextArea} = Input;
@@ -24,11 +24,12 @@ class NewGoods extends Component {
           ]
         };
         addGoods(data).then(res => {
-          console.log(res,'**')
-        }).catch(error => console.error(err))
+          message.success('添加成功');
+          window.location.href = '/#/menus'
+        }).catch(error => message.error(err.message))
       }
     })
-  }
+  };
   render() {
     const formItemLayout = {
       labelCol: {
