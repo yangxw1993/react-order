@@ -2,16 +2,20 @@ import React, {Component} from 'react';
 import {Button, Icon, Table, Row, Col, message} from 'antd';
 import style from "./index.scss";
 import {getGoodsList} from '../../services/goods'
+import {init} from '../../services/init'
 
 class Index extends Component {
-  constructor(props) {
-    super(props);
-
-  }
   // 钩子函数
   componentDidMount() {
+    this.getToken();
     this.getList();
   }
+  // 初始化token
+  getToken = () => {
+    init().then(res => {
+      console.log(res,'token**')
+    }).catch(err => message(err.message))
+  };
   // 获取列表
   getList = () => {
     getGoodsList().then(res => {
@@ -78,54 +82,6 @@ class Index extends Component {
             )
           }
         }
-      }
-    ];
-
-    const data = [
-      {
-        key: 1,
-        name: 'MacBook Pro',
-        description: '好用的Mac',
-        options:[
-          {
-            size: 256,
-            price: 13000
-          },
-          {
-            size: 512,
-            price: 18000
-          }
-        ]
-      },
-      {
-        key:2,
-        name: 'iPhone 7',
-        description: '好用的iPhone',
-        options:[
-          {
-            size: 32,
-            price: 5000
-          },
-          {
-            size: 64,
-            price: 6000
-          }
-        ]
-      },
-      {
-        key: 3,
-        name: '小米 6',
-        description: '好用的小米',
-        options:[
-          {
-            size: 64,
-            price: 2800
-          },
-          {
-            size: 128,
-            price: 3600
-          }
-        ]
       }
     ];
     let dataSource = [];

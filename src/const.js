@@ -1,6 +1,7 @@
 const BASE_URL = 'http://localhost:3001';
 const SUCCESS_CODE = 0;
 const API_URL = {
+  INIT: `${BASE_URL}/init`,
   /**
    * 用户
    */
